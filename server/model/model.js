@@ -1,6 +1,8 @@
+
 const mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
+    
     name : {
         type : String,
         required: true
@@ -10,10 +12,19 @@ var schema = new mongoose.Schema({
         required: true,
         unique: true
     },
+
     gender : String,
-    status : String
+    
+    address : {
+        type : String,
+        required : true
+    },
+    phone : {
+        type : Number,
+        required : true
+    }
 })
 
-const Userdb = mongoose.model('userdb', schema);
+const Contactdb = mongoose.model('contactdb', schema);
 
-module.exports = Userdb;
+module.exports = Contactdb;

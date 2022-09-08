@@ -1,27 +1,27 @@
-var Userdb = require('../model/model');
+let Contactdb = require('../model/model');
 
-// create and save new user
 exports.create = (req,res)=>{
-    // validate request
     if(!req.body){
         res.status(400).send({ message : "Content can not be emtpy!"});
         return;
     }
 
-    // new user
-    const user = new Userdb({
+    // new contact
+    const contact = new Contactdb({
+        
         name : req.body.name,
         email : req.body.email,
         gender: req.body.gender,
-        status : req.body.status
+        address : req.body.address,
+        phone : req.body.phone
     })
 
-    // save user in the database
-    user
-        .save(user)
+   
+
+    contact
+        .save(contact)
         .then(data => {
-            //res.send(data)
-            res.redirect('/add-user');
+            res.redirect('/add-contact');
         })
         .catch(err =>{
             res.status(500).send({
@@ -31,38 +31,37 @@ exports.create = (req,res)=>{
 
 }
 
-// retrieve and return all users/ retrive and return a single user
+
 exports.find = (req, res)=>{
 
     if(req.query.id){
         const id = req.query.id;
 
-        Userdb.findById(id)
+        Contactdb.findById(id)
             .then(data =>{
                 if(!data){
-                    res.status(404).send({ message : "Not found user with id "+ id})
+                    res.status(404).send({ message : "Not found contact with id "+ id})
                 }else{
                     res.send(data)
                 }
             })
             .catch(err =>{
-                res.status(500).send({ message: "Erro retrieving user with id " + id})
+                res.status(500).send({ message: "Erro retrieving contact with id " + id})
             })
 
     }else{
-        Userdb.find()
-            .then(user => {
-                res.send(user)
+        Contactdb.find()
+            .then(contact => {
+                res.send(contact)
             })
             .catch(err => {
-                res.status(500).send({ message : err.message || "Error Occurred while retriving user information" })
+                res.status(500).send({ message : err.message || "Error Occurred while retriving contact information" })
             })
     }
 
     
 }
 
-// Update a new idetified user by user id
 exports.update = (req, res)=>{
     if(!req.body){
         return res
@@ -71,36 +70,36 @@ exports.update = (req, res)=>{
     }
 
     const id = req.params.id;
-    Userdb.findByIdAndUpdate(id, req.body, { useFindAndModify: false})
+    Contactdb.findByIdAndUpdate(id, req.body, { useFindAndModify: false})
         .then(data => {
             if(!data){
-                res.status(404).send({ message : `Cannot Update user with ${id}. Maybe user not found!`})
+                res.status(404).send({ message : `Cannot Update contact with ${id}. Maybe contact not found!`})
             }else{
                 res.send(data)
             }
         })
         .catch(err =>{
-            res.status(500).send({ message : "Error Update user information"})
+            res.status(500).send({ message : "Error Update contact information"})
         })
 }
 
-// Delete a user with specified user id in the request
+
 exports.delete = (req, res)=>{
     const id = req.params.id;
 
-    Userdb.findByIdAndDelete(id)
+    Contactdb.findByIdAndDelete(id)
         .then(data => {
             if(!data){
                 res.status(404).send({ message : `Cannot Delete with id ${id}. Maybe id is wrong`})
             }else{
                 res.send({
-                    message : "User was deleted successfully!"
+                    message : "Contact was deleted successfully!"
                 })
             }
         })
         .catch(err =>{
             res.status(500).send({
-                message: "Could not delete User with id=" + id
+                message: "Could not delete contact with id=" + id
             });
         });
 }

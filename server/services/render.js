@@ -3,25 +3,41 @@ const axios = require('axios');
 
 exports.homeRoutes = (req, res) => {
     // Make a get request to /api/users
-    axios.get('http://localhost:3000/api/users')
+    axios.get('http://localhost:3000/api/contacts')
         .then(function(response){
-            res.render('index', { users : response.data });
+
+            res.render('index', { contacts : response.data });
         })
         .catch(err =>{
+
             res.send(err);
         })
 
     
 }
 
-exports.add_user = (req, res) =>{
-    res.render('add_user');
+exports.add_contact = (req, res) =>{
+    res.render('add_contact');
 }
 
-exports.update_user = (req, res) =>{
-    axios.get('http://localhost:3000/api/users', { params : { id : req.query.id }})
-        .then(function(userdata){
-            res.render("update_user", { user : userdata.data})
+exports.update_contact = (req, res) =>{
+    axios.get('http://localhost:3000/api/contacts', { params : { id : req.query.id }})
+        .then(function(contactdata){
+            res.render("update_contact", { contact : contactdata.data})
+        })
+        .catch(err =>{
+            res.send(err);
+        })
+}
+
+// exports.view_contact = (req, res) =>{
+//     res.render('view_contact');
+// }
+
+exports.view_contact = (req, res) => {
+    axios.get('http://localhost:3000/api/contacts', { params : { id : req.query.id }})
+        .then(function(contactdata){
+            res.render("view_contact", { contactss : contactdata.data})
         })
         .catch(err =>{
             res.send(err);

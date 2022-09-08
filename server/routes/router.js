@@ -4,6 +4,8 @@ const route = express.Router()
 const services = require('../services/render');
 const controller = require('../controller/controller');
 
+
+
 /**
  *  @description Root Route
  *  @method GET /
@@ -11,23 +13,29 @@ const controller = require('../controller/controller');
 route.get('/', services.homeRoutes);
 
 /**
- *  @description add users
- *  @method GET /add-user
+ *  @description add contacts
+ *  @method GET /add-contact
  */
-route.get('/add-user', services.add_user)
+route.get('/add-contact', services.add_contact)
 
 /**
- *  @description for update user
- *  @method GET /update-user
+ *  @description for update contact
+ *  @method GET /update-contact
  */
-route.get('/update-user', services.update_user)
+route.get('/update-contact', services.update_contact)
+
+/**
+ *  @description for view contact
+ *  @method GET /view-contact
+ */
+route.get('/view-contact', services.view_contact)
 
 
 // API
-route.post('/api/users', controller.create);
-route.get('/api/users', controller.find);
-route.put('/api/users/:id', controller.update);
-route.delete('/api/users/:id', controller.delete);
+route.post('/api/contacts', controller.create);
+route.get('/api/contacts', controller.find);
+route.put('/api/contacts/:id', controller.update);
+route.delete('/api/contacts/:id', controller.delete);
 
 
 module.exports = route

@@ -1,0 +1,51 @@
+
+
+<!-- header-->
+<%- include('include/_header') %>
+<!--/header-->
+
+
+<main id="site-main">
+    <div class="container">
+        <div class="box-nav d-flex justify-between">
+            <div class="filter">
+                <a href="/"><i class="fas fa-angle-double-left">All Contacts</i></a>
+            </div>
+        </div>
+        <div class="form-title text-center">
+            <h2 class="text-dark">View Contact</h2>
+            <span class="text-light">contact information</span>
+        </div> 
+
+        <form action="/view-contact" method="GET" id="view_contact" >
+                 
+                    <div class="view-items">
+                        <div class="view-item">
+                            <h4>Name</h>
+                            <p><%= contactss.name %></p>
+                        </div>
+                        <div class="view-item">
+                            <h4>Email</h4>
+                            <p><%= contactss.email %></p>
+                        </div>
+                        <div class="view-item">
+                            <h4>Gender</h4>
+                            <p><%= contactss.gender %></p>
+                        </div>
+                        <div class="view-item">
+                            <h4>Address</h4>
+                            <p><%= contactss.address %></p>
+                        </div>
+                        <div class="view-item">
+                            <h4>Phone</h4>
+                            <p><%= contactss.phone %></p>
+                        </div>
+                </div>
+        </form>
+        
+    </div>
+</main> 
+
+<!-- include footer -->
+<%- include('include/_footer') %>
+<!-- /include footer --> 

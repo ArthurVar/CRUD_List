@@ -1,23 +1,23 @@
 
 
 
-$("#add_user").submit(function(event){
+$("#add_contact").submit(function(event){
     alert("Data Inserted Successfully!");
 })
 
-$("#update_user").submit(function(event){
+$("#update_contact").submit(function(event){
     event.preventDefault();
 
-    var unindexed_array = $(this).serializeArray();
-    var data = {}
+    let unindexed_array = $(this).serializeArray();
+    let data = {}
 
     $.map(unindexed_array, function(n, i){
         data[n['name']] = n['value']
     })
 
 
-    var request = {
-        "url" : `http://localhost:3000/api/users/${data.id}`,
+    let request = {
+        "url" : `http://localhost:3000/api/contacts/${data.id}`,
         "method" : "PUT",
         "data" : data
     }
@@ -28,13 +28,14 @@ $("#update_user").submit(function(event){
 
 })
 
+
 if(window.location.pathname == "/"){
     $ondelete = $(".table tbody td a.delete");
     $ondelete.click(function(){
-        var id = $(this).attr("data-id")
+        let id = $(this).attr("data-id")
 
-        var request = {
-            "url" : `http://localhost:3000/api/users/${id}`,
+        let request = {
+            "url" : `http://localhost:3000/api/contacts/${id}`,
             "method" : "DELETE"
         }
 
